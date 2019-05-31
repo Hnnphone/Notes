@@ -1,11 +1,12 @@
-# 数据结构与算法
+## 数据结构与算法
 
-## No.1 冒泡排序
+### No.1 冒泡排序
 
-### 一般冒泡排序的写法
+#### 一般冒泡排序的写法
+
 ```
 function BubbleSort(arr) {
-    for (var i = 0; i < arr.length - 1; i++) { // 确定排序趟数
+	for (var i = 0; i < arr.length - 1; i++) { // 确定排序趟数
 		for (var j = 0; j < arr.length - 1 - i; j++) { // 确定比较次数，随趟数递减
 			if (arr[j] > arr[j + 1]) {
 				// 交换值
@@ -20,7 +21,8 @@ function BubbleSort(arr) {
 }
 ```
 
-### 优化一：在交换的地方加一个标记，如果那一趟排序没有交换元素，说明这组数据已经有序，不用再继续下去。
+#### 优化一：在交换的地方加一个标记，如果那一趟排序没有交换元素，说明这组数据已经有序，不用再继续下去。
+
 ```
 function BubbleSort1(arr) {
 	for (var i = 0; i < arr.length - 1; i++) { // 确定排序趟数
@@ -44,7 +46,8 @@ function BubbleSort1(arr) {
 }
 ```
 
-### 优化二: 可以记下最后一次交换的位置，后边没有交换，必然是有序的，然后下一次排序从第一个比较到上次记录的位置结束即可。
+#### 优化二: 可以记下最后一次交换的位置，后边没有交换，必然是有序的，然后下一次排序从第一个比较到上次记录的位置结束即可。
+
 ```
 function BubbleSort2(arr) {
 	var pos = arr.length - 1;
@@ -70,16 +73,18 @@ function BubbleSort2(arr) {
 }
 ```
 
-### 优化三: 大致思想就是一次排序可以确定两个值，正向扫描找到最大值交换到最后，反向扫描找到最小值交换到最前面。
+#### 优化三: 大致思想就是一次排序可以确定两个值，正向扫描找到最大值交换到最后，反向扫描找到最小值交换到最前面。
+
 ```
 function BubbleSort3(arr) {
     //...
 }
 ```
 
-## No.2 选择排序
+### No.2 选择排序
 
 简单理解 选择排序就是 从一个未知数据空间，选取数据之最 放到一个新的空间。
+
 ```
 function selectionSort(arr) {
 	for (var i = 0; i < arr.length - 1; i++) { // 趟数
@@ -99,15 +104,17 @@ function selectionSort(arr) {
 }
 ```
 
-## No.3 快速排序
+### No.3 快速排序
 
 快速排序是一种分治思想，即在每一趟挑选一个基准元素（pivot），并让其它比它大的元素移动到数组的一边，比它小的元素移动到数组的另一边，从而把数组拆解成了两个部分。
 
 如何移动元素，具体有两种方法：
+
 1. 挖坑法
 2. 指针交换法
 
 具体实现如下：
+
 ```
 function quickSort(arr, startIndex, endIndex) {
 	// 递归结束条件：startIndex 大于等于 endIndex 的时候，表明数组不可分割
@@ -155,7 +162,7 @@ function partition(arr, startIndex, endIndex) {
 }
 ```
 
-## No.4 反转数组
+### No.4 反转数组
 
 ```
 function reverseArr(arr) {
@@ -171,9 +178,10 @@ function reverseArr(arr) {
 }
 ```
 
-## No.5 数组去重
+### No.5 数组去重
 
-方式一，indexOf 方法，注意并不支持 IE8
+#### 方式一，indexOf 方法，注意并不支持 IE8
+
 ```
 function dr1(arr) {
 	// 声明一个空的新数组，用来保存不重复数据
@@ -188,7 +196,8 @@ function dr1(arr) {
 }
 ```
 
-方式二，思路：取原数组中 最大下标的重复值 放入到新数组内
+#### 方式二，思路：取原数组中 最大下标的重复值 放入到新数组内
+
 ```
 function dr2(arr) {
 	var temp = [];
@@ -201,12 +210,12 @@ function dr2(arr) {
 		}
 		temp.push(arr[i]);
 	}
-	
+
 	return temp;
 }
 ```
 
-## No.6 判断回文
+### No.6 判断回文
 
 ```
 function checkHuiWen(input) {
@@ -215,7 +224,7 @@ function checkHuiWen(input) {
 }
 ```
 
-## No.7 数组的全排列 - 深度优先搜索 - 回溯、穷举
+### No.7 数组的全排列 - 深度优先搜索 - 回溯、穷举
 
 ```
 var visited = new Array(8); // 标记节点的访问状态
@@ -238,16 +247,19 @@ function dfs(arr, depth, newArr) {
 }
 ```
 
-## No.8 01背包问题 - 动态规划
+### No.8 01 背包问题 - 动态规划
 
-### 问题
+#### 问题
+
 现在有一个背包，容量为 m，然后有 n 个货物，重量分别为 w1,w2,w3...wn，每个货物的价值是 v1,v2,v3...vn，w 和 v 没有任何关系，求背包能装下的最大价值？
 提示语：放与不放、矩阵、二维数组。
 
-### 思路
-假设 货物1 重量为 W1，价值为 V1，则只需分别计算出剩余货物在 m 容量中的最大价值f1和 (m-W1 容量中的最大价值 + V1)f2，最后比较f1、f2即可，以此类推...
+#### 思路
+
+假设 货物 1 重量为 W1，价值为 V1，则只需分别计算出剩余货物在 m 容量中的最大价值 f1 和 (m-W1 容量中的最大价值 + V1)f2，最后比较 f1、f2 即可，以此类推...
+
 ```
-// 公式推导 max{f(i-1, j), f(i-1, j - Wi) + Vi}，j>= Wi ∩ i > 0 
+// 公式推导 max{f(i-1, j), f(i-1, j - Wi) + Vi}，j>= Wi ∩ i > 0
 // 其中 i 表示可选货物递增， j 表示容量递增
 function knapsack(weights, values, m) {
 	var n = weights.length; // 货物总数量，可选货物数递增
@@ -274,7 +286,7 @@ function knapsack(weights, values, m) {
 }
 ```
 
-## No.9 扩展 - 背包问题（物品可分割，贪心算法）
+### No.9 扩展 - 背包问题（物品可分割，贪心算法）
 
-- 最优量度准则：性价比高的物体优先
-- rate: values[i]/weights[i]
+-   最优量度准则：性价比高的物体优先
+-   rate: values[i]/weights[i]
